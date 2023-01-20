@@ -5,6 +5,7 @@ pragma solidity ^0.8.17;
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
 import "hardhat/console.sol";
 
 // We need to import the helper functions from the contract that we copy/pasted.
@@ -99,5 +100,10 @@ contract MyEpicNFT is ERC721URIStorage {
     _tokenIds.increment();
     console.log("An NFT w/ ID %s has been minted to %s", newItemId, msg.sender);
     emit NewEpicNFTMinted(msg.sender, newItemId);
+  }
+
+  function getTotalNFTsMintedSoFar() public view returns (string memory){
+    uint256 currentID = Counters.current(_tokenIds);
+    return Strings.toString(currentID);
   }
 }
